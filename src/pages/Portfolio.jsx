@@ -60,36 +60,35 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      title: "Ford - Exterior Detailing",
+      title: "Porsche - Exterior Detailing",
       service: "Exterior Detailing",
-      before: Ford_Bfr02,
-      after: Ford_Aft02,
-      beforeDesc: "Faded paint and oxidation",
-      afterDesc: "Restored paint depth and protection",
-      duration: "5 hours",
+      before: "/porsche-before.jpg",
+      after: "/porsche-after.jpg",
+      beforeDesc: "Water spots and surface contamination",
+      afterDesc: "Flawless paint finish and protection",
+      duration: "6 hours",
       category: "Premium"
     },
     {
       id: 5,
-      title: "MAG - Interior Detailing",
-      service: "Interior Detailing", 
+      title: "MAG - Stage 1 Polishing",
+      service: "Stage 1 Polishing", 
       before: MAG_Bfe01,
       after: MAG_Aft01,
-      beforeDesc: "Stained leather and worn surfaces",
-      afterDesc: "Luxury interior restored",
-      duration: "3 hours",
+      beforeDesc: "Light swirl marks and minor imperfections",
+      afterDesc: "Enhanced gloss and clarity achieved",
+      duration: "4 hours",
       category: "Premium"
     },
     {
       id: 6,
-      title: "MAG - Full Valet",
-      service: "Full Valet",
-      before: MAG_Bef02,
-      after: MAG_Aft02,
-      beforeDesc: "Daily driver needing refresh",
-      afterDesc: "Clean and fresh appearance",
-      duration: "1.5 hours",
-      category: "Standard"
+      title: "Interior Detailing Process",
+      service: "Interior Detailing",
+      video: "/interior-detailing-video.mp4",
+      beforeDesc: "Complete interior transformation process",
+      afterDesc: "Professional interior detailing techniques",
+      duration: "2-4 hours",
+      category: "Premium"
     }
   ];
 
@@ -155,28 +154,43 @@ const Portfolio = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item) => (
               <Card key={item.id} className="bg-card border-primary/20 hover:border-primary/40 transition-colors overflow-hidden">
-                <div className="grid grid-cols-2 gap-1">
+                {item.video ? (
+                  // Video item layout
                   <div className="relative">
-                    <img 
-                      src={item.before} 
-                      alt={`${item.title} - Before`}
-                      className="w-full h-32 object-cover"
-                    />
-                    <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                      BEFORE
+                    <video 
+                      src={item.video}
+                      controls
+                      className="w-full h-64 object-cover"
+                      poster="/porsche-after.jpg"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                ) : (
+                  // Before/After image layout
+                  <div className="grid grid-cols-2 gap-1">
+                    <div className="relative">
+                      <img 
+                        src={item.before} 
+                        alt={`${item.title} - Before`}
+                        className="w-full h-32 object-cover"
+                      />
+                      <div className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                        BEFORE
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <img 
+                        src={item.after} 
+                        alt={`${item.title} - After`}
+                        className="w-full h-32 object-cover"
+                      />
+                      <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+                        AFTER
+                      </div>
                     </div>
                   </div>
-                  <div className="relative">
-                    <img 
-                      src={item.after} 
-                      alt={`${item.title} - After`}
-                      className="w-full h-32 object-cover"
-                    />
-                    <div className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
-                      AFTER
-                    </div>
-                  </div>
-                </div>
+                )}
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-3">
                     <Badge className={getCategoryColor(item.category)}>
