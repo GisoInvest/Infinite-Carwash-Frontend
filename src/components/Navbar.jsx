@@ -56,15 +56,6 @@ const Navbar = () => {
               <Phone className="w-4 h-4 mr-2" />
               Call Us Now
             </Button>
-            <Link to="/booking">
-              <Button
-                size="sm"
-                className="bg-primary text-black hover:bg-primary/90"
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Free Quote
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -109,16 +100,6 @@ const Navbar = () => {
                   <Phone className="w-4 h-4 mr-2" />
                   Call Us Now
                 </Button>
-                <Link to="/booking">
-                  <Button
-                    size="sm"
-                    className="bg-primary text-black hover:bg-primary/90"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <FileText className="w-4 h-4 mr-2" />
-                    Free Quote
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>

@@ -55,38 +55,73 @@ const BookingSystem = () => {
   ];
 
   const services = {
-    core: [
-      { 
-        id: 'car-wash', 
-        name: 'Car Wash', 
-        prices: { small: 7, medium: 9, large: 12, van: 14 },
-        duration: '30 mins'
-      },
-      { 
-        id: 'mini-valet', 
-        name: 'Mini Valet', 
-        prices: { small: 14, medium: 16, large: 18, van: 20 },
-        duration: '1 hour'
-      },
-      { 
-        id: 'full-valet', 
-        name: 'Full Valet', 
-        prices: { small: 45, medium: 55, large: 65, van: 70 },
-        duration: '2-3 hours'
-      }
-    ],
     premium: [
-      { id: 'interior-detailing', name: 'Interior Detailing', price: 120, duration: '2-3 hours' },
-      { id: 'exterior-detailing', name: 'Exterior Detailing', price: 200, duration: '4-5 hours' },
-      { id: 'full-detailing', name: 'Full Detailing', price: 300, duration: '6-8 hours' },
-      { id: 'stage1-polishing', name: 'Stage 1 Polishing', price: 400, duration: '3-4 hours' },
-      { id: 'stage2-polishing', name: 'Stage 2 Polishing', price: 550, duration: '6+ hours' }
+      { 
+        id: 'interior-detailing', 
+        name: 'Interior Detailing', 
+        price: 120, 
+        duration: '2-3 hours',
+        details: [
+          'Deep vacuum and steam cleaning',
+          'Leather conditioning and protection',
+          'Dashboard and trim restoration',
+          'Carpet and upholstery cleaning'
+        ]
+      },
+      { 
+        id: 'exterior-detailing', 
+        name: 'Exterior Detailing', 
+        price: 200, 
+        duration: '4-5 hours',
+        details: [
+          'Paint decontamination and clay bar',
+          'Machine polishing and correction',
+          'Ceramic coating application',
+          'Wheel and tire detailing'
+        ]
+      },
+      { 
+        id: 'full-detailing', 
+        name: 'Full Detailing', 
+        price: 300, 
+        duration: '6-8 hours',
+        details: [
+          'Complete interior and exterior service',
+          'Paint correction and protection',
+          'Engine bay cleaning',
+          'Premium wax or ceramic coating'
+        ]
+      },
+      { 
+        id: 'stage1-polishing', 
+        name: 'Stage 1 Polishing', 
+        price: 400, 
+        duration: '3-4 hours',
+        details: [
+          'Single-stage machine polishing',
+          'Light swirl mark removal',
+          'Paint enhancement and gloss',
+          'Protective sealant application'
+        ]
+      },
+      { 
+        id: 'stage2-polishing', 
+        name: 'Stage 2 Polishing', 
+        price: 550, 
+        duration: '6+ hours',
+        details: [
+          'Two-stage paint correction',
+          'Heavy defect and scratch removal',
+          'Professional grade compounds',
+          'Long-lasting protection coating'
+        ]
+      }
     ]
   };
 
   const serviceLocations = [
     { id: 'mobile', name: 'Mobile Service', icon: <Car className="w-5 h-5" />, description: 'We come to your location' },
-    { id: 'unit', name: 'Visit Our Unit', icon: <Building className="w-5 h-5" />, description: 'Drop off at our facility' }
+    { id: 'unit', name: 'Coming Soon', icon: <Building className="w-5 h-5" />, description: 'Drop off at our facility' }
   ];
 
   // Calculate pricing when vehicle type or service changes
@@ -95,12 +130,9 @@ const BookingSystem = () => {
       let basePrice = 0;
       
       // Find the service and calculate price
-      const coreService = services.core.find(s => s.id === bookingData.service);
       const premiumService = services.premium.find(s => s.id === bookingData.service);
       
-      if (coreService) {
-        basePrice = coreService.prices[bookingData.vehicleType];
-      } else if (premiumService) {
+      if (premiumService) {
         basePrice = premiumService.price;
       }
 
@@ -358,10 +390,40 @@ const BookingSystem = () => {
       </div>
 
       <form onSubmit={handleBookingSubmit} className="space-y-8">
+        {/* Service Location */}
+        <Card className="bg-card border-primary/20">
+          <CardHeader>
+            <CardTitle className="text-white">1. Service Location</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {serviceLocations.map((location) => (
+                <div
+                  key={location.id}
+                  onClick={() => handleInputChange('serviceLocation', location.id)}
+                  className={`cursor-pointer p-4 rounded-lg border-2 transition-colors ${
+                    bookingData.serviceLocation === location.id
+                      ? 'border-primary bg-primary/10'
+                      : 'border-gray-600 hover:border-primary/50'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="text-primary">{location.icon}</div>
+                    <div>
+                      <h4 className="font-semibold text-white">{location.name}</h4>
+                      <p className="text-gray-400 text-sm">{location.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Vehicle Type Selection */}
         <Card className="bg-card border-primary/20">
           <CardHeader>
-            <CardTitle className="text-white">1. Select Your Vehicle Type</CardTitle>
+            <CardTitle className="text-white">2. Select Your Vehicle Type</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -391,36 +453,10 @@ const BookingSystem = () => {
         {/* Service Selection */}
         <Card className="bg-card border-primary/20">
           <CardHeader>
-            <CardTitle className="text-white">2. Choose Your Service</CardTitle>
+            <CardTitle className="text-white">3. Choose Your Service</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
-              {/* Core Services */}
-              <div>
-                <h3 className="text-lg font-semibold text-white mb-4">Core Services</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {services.core.map((service) => (
-                    <div
-                      key={service.id}
-                      onClick={() => handleInputChange('service', service.id)}
-                      className={`cursor-pointer p-4 rounded-lg border-2 transition-colors ${
-                        bookingData.service === service.id
-                          ? 'border-primary bg-primary/10'
-                          : 'border-gray-600 hover:border-primary/50'
-                      }`}
-                    >
-                      <h4 className="font-semibold text-white mb-2">{service.name}</h4>
-                      <p className="text-gray-400 text-sm mb-2">{service.duration}</p>
-                      {bookingData.vehicleType && (
-                        <p className="text-primary font-semibold">
-                          £{service.prices[bookingData.vehicleType]}
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Premium Services */}
               <div>
                 <h3 className="text-lg font-semibold text-white mb-4">Premium Services</h3>
@@ -429,49 +465,35 @@ const BookingSystem = () => {
                     <div
                       key={service.id}
                       onClick={() => handleInputChange('service', service.id)}
-                      className={`cursor-pointer p-4 rounded-lg border-2 transition-colors ${
+                      className={`cursor-pointer p-4 rounded-lg border-2 transition-colors relative ${
                         bookingData.service === service.id
                           ? 'border-primary bg-primary/10'
                           : 'border-gray-600 hover:border-primary/50'
                       }`}
                     >
-                      <h4 className="font-semibold text-white mb-2">{service.name}</h4>
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="font-semibold text-white">{service.name}</h4>
+                        <div className="group relative">
+                          <Info className="w-4 h-4 text-primary cursor-help" />
+                          <div className="absolute right-0 top-6 w-64 bg-gray-800 border border-primary/20 rounded-lg p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <h5 className="text-white font-semibold mb-2">Service Includes:</h5>
+                            <ul className="text-gray-300 text-sm space-y-1">
+                              {service.details.map((detail, index) => (
+                                <li key={index} className="flex items-start">
+                                  <CheckCircle className="w-3 h-3 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                                  {detail}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
                       <p className="text-gray-400 text-sm mb-2">{service.duration}</p>
                       <p className="text-primary font-semibold">£{service.price}</p>
                     </div>
                   ))}
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Service Location */}
-        <Card className="bg-card border-primary/20">
-          <CardHeader>
-            <CardTitle className="text-white">3. Service Location</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {serviceLocations.map((location) => (
-                <div
-                  key={location.id}
-                  onClick={() => handleInputChange('serviceLocation', location.id)}
-                  className={`cursor-pointer p-4 rounded-lg border-2 transition-colors ${
-                    bookingData.serviceLocation === location.id
-                      ? 'border-primary bg-primary/10'
-                      : 'border-gray-600 hover:border-primary/50'
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <div className="text-primary">{location.icon}</div>
-                    <div>
-                      <h4 className="font-semibold text-white">{location.name}</h4>
-                      <p className="text-gray-400 text-sm">{location.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </CardContent>
         </Card>

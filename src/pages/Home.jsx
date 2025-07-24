@@ -72,15 +72,6 @@ const Home = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/booking">
-                <Button 
-                  size="lg" 
-                  className="bg-primary text-black hover:bg-primary/90 text-lg px-8 py-4"
-                >
-                  <FileText className="w-5 h-5 mr-2" />
-                  Get Free Quote
-                </Button>
-              </Link>
               <Button 
                 variant="outline" 
                 size="lg"

@@ -143,13 +143,6 @@ const Contact = () => {
                 <Phone className="w-5 h-5 mr-2" />
                 Call Now: 07403139086
               </Button>
-              <Button 
-                variant="outline"
-                className="w-full border-primary text-primary hover:bg-primary hover:text-black text-lg py-6"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Get Free Quote
-              </Button>
             </div>
 
             {/* Social Media */}

@@ -304,16 +304,12 @@ const Portfolio = () => {
                 Join our satisfied customers and experience the difference professional detailing makes. 
                 Book your service today and see your vehicle transformed.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-primary text-black hover:bg-primary/90">
-                  Book Now
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="border-primary text-primary hover:bg-primary hover:text-black"
-                >
-                  Get Free Quote
-                </Button>
+              <div className="flex gap-4">
+                <Link to="/booking">
+                  <Button className="bg-primary text-black hover:bg-primary/90">
+                    Book Now
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
