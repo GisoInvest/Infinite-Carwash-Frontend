@@ -12,36 +12,6 @@ import {
 } from 'lucide-react';
 
 const Pricing = () => {
-  const coreServices = [
-    {
-      service: "Car Wash",
-      prices: {
-        small: "£7",
-        medium: "£9", 
-        large: "£12",
-        van: "£14"
-      }
-    },
-    {
-      service: "Mini Valet",
-      prices: {
-        small: "£14",
-        medium: "£16",
-        large: "£18", 
-        van: "£20"
-      }
-    },
-    {
-      service: "Full Valet",
-      prices: {
-        small: "£45",
-        medium: "£55",
-        large: "£65",
-        van: "£70"
-      }
-    }
-  ];
-
   const premiumServices = [
     {
       service: "Interior Detailing",
@@ -134,38 +104,9 @@ const Pricing = () => {
           </div>
         </div>
 
-        {/* Core Services Pricing */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Core Services</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full bg-card rounded-lg border border-primary/20">
-              <thead>
-                <tr className="border-b border-primary/20">
-                  <th className="text-left p-6 text-white font-semibold">Service</th>
-                  <th className="text-center p-6 text-white font-semibold">Small Car</th>
-                  <th className="text-center p-6 text-white font-semibold">Medium Car</th>
-                  <th className="text-center p-6 text-white font-semibold">Large Car</th>
-                  <th className="text-center p-6 text-white font-semibold">Van</th>
-                </tr>
-              </thead>
-              <tbody>
-                {coreServices.map((service, index) => (
-                  <tr key={index} className="border-b border-primary/10 hover:bg-primary/5 transition-colors">
-                    <td className="p-6 text-white font-medium">{service.service}</td>
-                    <td className="p-6 text-center text-primary font-semibold">{service.prices.small}</td>
-                    <td className="p-6 text-center text-primary font-semibold">{service.prices.medium}</td>
-                    <td className="p-6 text-center text-primary font-semibold">{service.prices.large}</td>
-                    <td className="p-6 text-center text-primary font-semibold">{service.prices.van}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         {/* Premium Services */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Premium Services</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {premiumServices.map((service, index) => (
               <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-colors">

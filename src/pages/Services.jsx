@@ -13,49 +13,6 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
-  const coreServices = [
-    {
-      icon: <Droplets className="w-8 h-8 text-primary" />,
-      title: "Car Wash",
-      description: "Our signature non-contact car wash service that safely removes dirt and grime while protecting your vehicle's paintwork.",
-      features: [
-        "Non-contact washing system",
-        "Scratch-free process",
-        "Premium cleaning products",
-        "Wheel and tire cleaning",
-        "Quick drying"
-      ],
-      pricing: "From £7 - £14"
-    },
-    {
-      icon: <Brush className="w-8 h-8 text-primary" />,
-      title: "Mini Valet",
-      description: "A comprehensive cleaning service that includes exterior wash and basic interior cleaning for a fresh, clean vehicle.",
-      features: [
-        "Complete exterior wash",
-        "Interior vacuum",
-        "Dashboard cleaning",
-        "Window cleaning (inside & out)",
-        "Tire shine application"
-      ],
-      pricing: "From £14 - £20"
-    },
-    {
-      icon: <Car className="w-8 h-8 text-primary" />,
-      title: "Full Valet",
-      description: "Our most popular service combining thorough exterior and interior cleaning for a complete vehicle refresh.",
-      features: [
-        "Premium exterior wash & dry",
-        "Complete interior deep clean",
-        "Leather/fabric conditioning",
-        "All surfaces cleaned & protected",
-        "Wheel arch cleaning",
-        "Door jamb cleaning"
-      ],
-      pricing: "From £45 - £70"
-    }
-  ];
-
   const premiumServices = [
     {
       icon: <Sparkles className="w-8 h-8 text-primary" />,
@@ -143,53 +100,15 @@ const Services = () => {
             Our <span className="text-primary">Services</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Comprehensive car care services designed to keep your vehicle looking its absolute best. 
-            From basic washes to premium detailing, we have the perfect service for every need.
+            Professional detailing and car care services designed to keep your vehicle looking its absolute best. 
+            Premium services for the ultimate car care experience.
           </p>
-        </div>
-
-        {/* Core Services */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Core Services</h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Our essential car care services available for all vehicle types with competitive pricing.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {coreServices.map((service, index) => (
-              <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-colors h-full">
-                <CardHeader>
-                  <div className="flex items-center space-x-3 mb-4">
-                    {service.icon}
-                    <CardTitle className="text-white">{service.title}</CardTitle>
-                  </div>
-                  <p className="text-gray-400">{service.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-primary rounded-full"></div>
-                        <span className="text-gray-300 text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border-t border-primary/20 pt-4">
-                    <p className="text-primary font-semibold text-lg">{service.pricing}</p>
-                    <p className="text-gray-400 text-sm">*Pricing varies by vehicle size</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
 
         {/* Premium Services */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Premium Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Services</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Professional detailing and polishing services for the ultimate car care experience.
             </p>
