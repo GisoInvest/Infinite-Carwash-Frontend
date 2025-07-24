@@ -106,7 +106,7 @@ const Pricing = () => {
 
         {/* Premium Services */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-white text-center mb-8">Our Services</h2>
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Premium Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {premiumServices.map((service, index) => (
               <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-colors">

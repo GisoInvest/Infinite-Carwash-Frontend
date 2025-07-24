@@ -2,6 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Star, Clock, Car } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Import all the new images
 import AudiRS6 from '../assets/AudiRS6.jpg';

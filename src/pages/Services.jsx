@@ -108,7 +108,7 @@ const Services = () => {
         {/* Premium Services */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Our Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Premium Services</h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Professional detailing and polishing services for the ultimate car care experience.
             </p>
