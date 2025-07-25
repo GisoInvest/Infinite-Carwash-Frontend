@@ -12,7 +12,7 @@ import TermsConditions from './pages/TermsConditions';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
 import Tracking from './pages/Tracking';
-import Admin from './pages/Admin';
+import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import './App.css';
 import { useState, useEffect } from 'react';
@@ -45,7 +45,7 @@ function App() {
             <Route path="/booking" element={<Booking />} />
             <Route path="/tracking" element={<Tracking />} />
             <Route path="/admin-login" element={<AdminLogin />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />
