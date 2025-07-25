@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - Infinite Mobile Carwash</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #000000, #1a1a1a);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        h1 {
+            color: #FFD700;
+            margin-bottom: 30px;
+        }
+        .btn {
+            background: #FFD700;
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: #FFA500;
+            transform: translateY(-2px);
+        }
+        .info {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #FFD700;
+        }
+        .credentials {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Admin Panel Access</h1>
+        <p>Welcome to the Infinite Mobile Carwash Admin Panel</p>
+        
+        <div class="info">
+            <h3>📋 Admin Credentials</h3>
+            <div class="credentials">
+                <strong>Email:</strong> infinitemobilecarwashdetailing@gmail.com<br>
+                <strong>Password:</strong> InfinitePassword000*
+            </div>
+        </div>
+        
+        <button class="btn" onclick="goToAdminLogin()">
+            🚀 Access Admin Login
+        </button>
+        
+        <button class="btn" onclick="goToAdminDashboard()">
+            📊 Go to Dashboard
+        </button>
+        
+        <div class="info">
+            <h3>🛠️ Admin Panel Features</h3>
+            <ul style="text-align: left;">
+                <li>Driver Management System</li>
+                <li>Booking Tracking & Management</li>
+                <li>Customer Loyalty Rewards</li>
+                <li>Dashboard Analytics</li>
+                <li>Automated Email Notifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function goToAdminLogin() {
+            // Try multiple methods to navigate to admin login
+            try {
+                // Method 1: Direct navigation
+                window.location.href = '/admin-login';
+            } catch (e) {
+                try {
+                    // Method 2: Hash routing
+                    window.location.href = '/#/admin-login';
+                } catch (e2) {
+                    // Method 3: Replace current location
+                    window.location.replace('/admin-login');
+                }
+            }
+        }
+        
+        function goToAdminDashboard() {
+            // Try multiple methods to navigate to admin dashboard
+            try {
+                // Method 1: Direct navigation
+                window.location.href = '/admin';
+            } catch (e) {
+                try {
+                    // Method 2: Hash routing
+                    window.location.href = '/#/admin';
+                } catch (e2) {
+                    // Method 3: Replace current location
+                    window.location.replace('/admin');
+                }
+            }
+        }
+        
+        // Auto-redirect after 10 seconds if user doesn't click
+        setTimeout(function() {
+            if (confirm('Auto-redirect to Admin Login in 3 seconds. Click OK to proceed or Cancel to stay.')) {
+                goToAdminLogin();
+            }
+        }, 7000);
+    </script>
+</body>
+</html>
+

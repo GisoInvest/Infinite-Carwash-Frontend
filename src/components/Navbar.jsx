@@ -47,6 +47,13 @@ const Navbar = () => {
 
           {/* Action Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <Link
+              to="/admin-login"
+              className="text-xs px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+              title="Admin Panel Access"
+            >
+              🔐 ADMIN
+            </Link>
             <Button
               variant="outline"
               size="sm"
@@ -88,6 +95,13 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="flex flex-col space-y-2 px-3 pt-4">
+                <Link
+                  to="/admin-login"
+                  className="text-center px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  🔐 ADMIN PANEL ACCESS
+                </Link>
                 <Button
                   variant="outline"
                   size="sm"
