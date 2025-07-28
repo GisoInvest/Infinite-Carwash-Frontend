@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
+import { apiRequest } from '@/config/api';
 
 const AdminLogin = () => {
   const [formData, setFormData] = useState({
@@ -38,12 +39,8 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiRequest('api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
         body: JSON.stringify(formData)
       });
 

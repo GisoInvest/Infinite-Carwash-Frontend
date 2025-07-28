@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { apiRequest } from '@/config/api';
 import { 
   Users, 
   Car, 
@@ -80,9 +81,7 @@ const AdminDashboard = () => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch('/api/auth/check-auth', {
-        credentials: 'include'
-      });
+      const response = await apiRequest('api/auth/check-auth');
       const result = await response.json();
       
       if (!result.authenticated) {
@@ -100,9 +99,7 @@ const AdminDashboard = () => {
 
   const loadDashboardData = async () => {
     try {
-      const response = await fetch('/api/admin/dashboard-stats', {
-        credentials: 'include'
-      });
+      const response = await apiRequest('api/admin/dashboard-stats');
       const result = await response.json();
       
       if (result.success) {
@@ -117,9 +114,7 @@ const AdminDashboard = () => {
 
   const loadDrivers = async () => {
     try {
-      const response = await fetch('/api/drivers', {
-        credentials: 'include'
-      });
+      const response = await apiRequest('api/drivers');
       const result = await response.json();
       
       if (result.success) {
@@ -133,7 +128,7 @@ const AdminDashboard = () => {
 
   const loadBookings = async () => {
     try {
-      const response = await fetch('/api/admin/bookings', {
+      const response = await apiRequest('api/admin/bookings', {
         credentials: 'include'
       });
       const result = await response.json();
@@ -149,7 +144,7 @@ const AdminDashboard = () => {
 
   const loadCustomers = async () => {
     try {
-      const response = await fetch('/api/admin/customers', {
+      const response = await apiRequest('api/admin/customers', {
         credentials: 'include'
       });
       const result = await response.json();
@@ -165,7 +160,7 @@ const AdminDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', {
+      await apiRequest('api/auth/logout', {
         method: 'POST',
         credentials: 'include'
       });
@@ -245,7 +240,7 @@ const AdminDashboard = () => {
     if (!confirm('Are you sure you want to delete this driver?')) return;
 
     try {
-      const response = await fetch(`/api/drivers/${driverId}`, {
+      const response = await apiRequest(`api/drivers/${driverId}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -266,7 +261,7 @@ const AdminDashboard = () => {
 
   const assignDriverToBooking = async (bookingId, driverId) => {
     try {
-      const response = await fetch(`/api/admin/bookings/${bookingId}/assign-driver`, {
+      const response = await apiRequest(`api/admin/bookings/${bookingId}/assign-driver`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -291,7 +286,7 @@ const AdminDashboard = () => {
 
   const updateBookingStatus = async (bookingId, status) => {
     try {
-      const response = await fetch(`/api/admin/bookings/${bookingId}/update-status`, {
+      const response = await apiRequest(`api/admin/bookings/${bookingId}/update-status`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

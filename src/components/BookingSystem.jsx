@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { apiRequest } from '@/config/api';
 import { 
   Car, 
   Truck, 
@@ -211,7 +212,7 @@ const BookingSystem = () => {
     } else {
       // No deposit required, complete booking directly
       try {
-        const response = await fetch('https://infinite-carwash-backend.onrender.com/api/book', {
+        const response = await apiRequest('api/book', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
