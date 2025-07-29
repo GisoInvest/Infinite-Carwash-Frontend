@@ -12,7 +12,7 @@ import {
   FileText,
   CheckCircle
 } from 'lucide-react';
-import FerrariVideo from '../assets/Ferrari.mp4';
+// import FerrariVideo from '../assets/Ferrari.mp4';
 
 const Home = () => {
   const features = [
@@ -106,7 +106,8 @@ const Home = () => {
                 poster=""
                 preload="metadata"
               >
-                <source src={FerrariVideo} type="video/mp4" />
+                {/* <source src={FerrariVideo} type="video/mp4" /> */}
+                <source src="" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
