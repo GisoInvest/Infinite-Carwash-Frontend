@@ -212,7 +212,7 @@ const BookingSystem = () => {
     } else {
       // No deposit required, complete booking directly
       try {
-        const response = await apiRequest('api/book', {
+        const response = await fetch('https://infinite-carwash-backend.onrender.com/api/book', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
