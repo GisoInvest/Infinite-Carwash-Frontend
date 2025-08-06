@@ -13,6 +13,69 @@ import {
 } from 'lucide-react';
 
 const Services = () => {
+  const basicServices = [
+    {
+      icon: <Droplets className="w-8 h-8 text-primary" />,
+      title: "Car Wash",
+      description: "Essential exterior cleaning to keep your vehicle looking fresh and clean.",
+      features: [
+        "Exterior rinse & wash",
+        "Wheel cleaning",
+        "Tire shine application",
+        "Window cleaning",
+        "Quick dry & finish"
+      ],
+      pricing: [
+        { size: "Small Car", price: "£9" },
+        { size: "Medium Car", price: "£12" },
+        { size: "Large Car", price: "£14" },
+        { size: "Van", price: "£15" }
+      ],
+      time: "30-45 mins"
+    },
+    {
+      icon: <Car className="w-8 h-8 text-primary" />,
+      title: "Mini Valet",
+      description: "Comprehensive interior and exterior cleaning for a complete refresh of your vehicle.",
+      features: [
+        "Full exterior wash",
+        "Complete interior vacuum",
+        "Dashboard & trim cleaning",
+        "Window cleaning inside & out",
+        "Tire shine & wheel clean",
+        "Air freshener application"
+      ],
+      pricing: [
+        { size: "Small Car", price: "£14" },
+        { size: "Medium Car", price: "£16" },
+        { size: "Large Car", price: "£18" },
+        { size: "Van", price: "£20" }
+      ],
+      time: "60-90 mins"
+    },
+    {
+      icon: <Sparkles className="w-8 h-8 text-primary" />,
+      title: "Full Valet",
+      description: "Premium valet service combining thorough cleaning with attention to detail.",
+      features: [
+        "Complete exterior wash & wax",
+        "Deep interior vacuum & clean",
+        "Leather/fabric conditioning",
+        "Dashboard & trim restoration",
+        "Alloy wheel deep clean",
+        "Paint protection spray",
+        "Engine bay cleaning"
+      ],
+      pricing: [
+        { size: "Small Car", price: "£45" },
+        { size: "Medium Car", price: "£55" },
+        { size: "Large Car", price: "£65" },
+        { size: "Van", price: "£70" }
+      ],
+      time: "90-120 mins"
+    }
+  ];
+
   const premiumServices = [
     {
       icon: <Sparkles className="w-8 h-8 text-primary" />,
@@ -103,6 +166,62 @@ const Services = () => {
             Professional detailing and car care services designed to keep your vehicle looking its absolute best. 
             Premium services for the ultimate car care experience.
           </p>
+        </div>
+
+        {/* Basic Services */}
+        <div className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Basic Services</h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Affordable car care services for regular maintenance and cleaning.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {basicServices.map((service, index) => (
+              <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <div className="flex items-center space-x-3 mb-4">
+                    {service.icon}
+                    <CardTitle className="text-white">{service.title}</CardTitle>
+                  </div>
+                  <p className="text-gray-400">{service.description}</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center space-x-2">
+                        <div className="w-2 h-2 bg-primary rounded-full"></div>
+                        <span className="text-gray-300 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="border-t border-primary/20 pt-4">
+                    {service.pricing ? (
+                      <div>
+                        <div className="grid grid-cols-2 gap-2 mb-3">
+                          {service.pricing.map((priceItem, priceIdx) => (
+                            <div key={priceIdx} className="flex justify-between items-center bg-primary/5 rounded px-2 py-1">
+                              <span className="text-gray-300 text-xs">{priceItem.size}</span>
+                              <span className="text-primary font-semibold text-sm">{priceItem.price}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <p className="text-gray-400 text-sm text-center">{service.time}</p>
+                      </div>
+                    ) : (
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-primary font-semibold text-xl">{service.price}</p>
+                          <p className="text-gray-400 text-sm">{service.time}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Premium Services */}

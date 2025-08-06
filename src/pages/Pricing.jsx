@@ -12,6 +12,42 @@ import {
 } from 'lucide-react';
 
 const Pricing = () => {
+  const basicServices = [
+    {
+      service: "Car Wash",
+      description: "Essential exterior cleaning to keep your vehicle looking fresh and clean",
+      time: "30-45 mins",
+      pricing: [
+        { size: "Small Car", price: "£9" },
+        { size: "Medium Car", price: "£12" },
+        { size: "Large Car", price: "£14" },
+        { size: "Van", price: "£15" }
+      ]
+    },
+    {
+      service: "Mini Valet",
+      description: "Comprehensive interior and exterior cleaning for a complete refresh",
+      time: "60-90 mins",
+      pricing: [
+        { size: "Small Car", price: "£14" },
+        { size: "Medium Car", price: "£16" },
+        { size: "Large Car", price: "£18" },
+        { size: "Van", price: "£20" }
+      ]
+    },
+    {
+      service: "Full Valet",
+      description: "Premium valet service combining thorough cleaning with attention to detail",
+      time: "90-120 mins",
+      pricing: [
+        { size: "Small Car", price: "£45" },
+        { size: "Medium Car", price: "£55" },
+        { size: "Large Car", price: "£65" },
+        { size: "Van", price: "£70" }
+      ]
+    }
+  ];
+
   const premiumServices = [
     {
       service: "Interior Detailing",
@@ -98,6 +134,43 @@ const Pricing = () => {
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">{vehicle.type}</h3>
                   <p className="text-gray-400 text-sm">{vehicle.examples}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Basic Services */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-white text-center mb-8">Basic Services</h2>
+          <p className="text-gray-400 text-center mb-8 max-w-2xl mx-auto">
+            Affordable car care services for regular maintenance and cleaning.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {basicServices.map((service, index) => (
+              <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-colors">
+                <CardHeader>
+                  <CardTitle className="text-white">{service.service}</CardTitle>
+                  <p className="text-gray-400">{service.description}</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 mb-4">
+                    {service.pricing.map((priceItem, priceIdx) => (
+                      <div key={priceIdx} className="flex justify-between items-center bg-primary/5 rounded px-3 py-2">
+                        <span className="text-gray-300 text-sm">{priceItem.size}</span>
+                        <span className="text-primary font-semibold">{priceItem.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex items-center justify-center text-gray-400 mb-4">
+                    <Clock className="w-4 h-4 mr-1" />
+                    <span className="text-sm">{service.time}</span>
+                  </div>
+                  <Link to="/booking">
+                    <Button className="w-full bg-primary text-black hover:bg-primary/90">
+                      Book Now
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
