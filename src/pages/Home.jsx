@@ -10,11 +10,102 @@ import {
   Star,
   Phone,
   FileText,
-  CheckCircle
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
-// import FerrariVideo from '../assets/Ferrari.mp4';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
+  // Carousel images
+  const carouselImages = [
+    {
+      src: "/After(1).jpg",
+      alt: "Professional car detailing result - After transformation",
+      title: "Premium Detailing Results"
+    },
+    {
+      src: "/PorscheExterior(1).jpg", 
+      alt: "Porsche exterior detailing showcase",
+      title: "Porsche Exterior Perfection"
+    },
+    {
+      src: "/AudiRS6Back.jpg",
+      alt: "Audi RS6 rear view after detailing",
+      title: "Audi RS6 Premium Finish"
+    },
+    {
+      src: "/AudiRS6Front.jpg",
+      alt: "Audi RS6 front view after detailing", 
+      title: "Audi RS6 Front Detail"
+    },
+    {
+      src: "/Ferrari_Aft01(2).jpg",
+      alt: "Ferrari after professional detailing",
+      title: "Ferrari Showroom Condition"
+    },
+    {
+      src: "/Ferrari_Aft02.jpg",
+      alt: "Ferrari detailing completion",
+      title: "Ferrari Premium Care"
+    },
+    {
+      src: "/Jaguar_aft01(1).jpg",
+      alt: "Jaguar after detailing service",
+      title: "Jaguar Excellence"
+    },
+    {
+      src: "/Jaguar_Aft02(2).jpg",
+      alt: "Jaguar professional finish",
+      title: "Jaguar Luxury Detail"
+    },
+    {
+      src: "/MAG_Aft01(2).jpg",
+      alt: "MAG vehicle after detailing",
+      title: "Professional MAG Detailing"
+    },
+    {
+      src: "/MAG_Aft02(1).jpg",
+      alt: "MAG vehicle premium finish",
+      title: "MAG Premium Results"
+    },
+    {
+      src: "/RangeRover_exterior(1).jpg",
+      alt: "Range Rover exterior detailing",
+      title: "Range Rover Luxury Care"
+    },
+    {
+      src: "/PorscheInterior(1).jpg",
+      alt: "Porsche interior detailing",
+      title: "Porsche Interior Perfection"
+    },
+    {
+      src: "/YarisInterior.jpg",
+      alt: "Yaris interior detailing",
+      title: "Yaris Interior Excellence"
+    }
+  ];
+
+  // Carousel state
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const slideInterval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 4000); // Change slide every 4 seconds
+
+    return () => clearInterval(slideInterval);
+  }, [carouselImages.length]);
+
+  // Manual navigation
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
   const features = [
     {
       icon: <Car className="w-8 h-8 text-primary" />,
@@ -86,7 +177,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Video Showcase Section */}
+      {/* Image Carousel Showcase Section */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -94,26 +185,72 @@ const Home = () => {
               See Our Work in <span className="text-primary">Action</span>
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Watch our professional detailing process transform this stunning Ferrari to showroom condition.
+              Witness our professional detailing transformations across luxury and everyday vehicles.
             </p>
           </div>
           
           <div className="max-w-4xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden border border-primary/20">
-              <video 
-                className="w-full h-auto"
-                controls
-                poster=""
-                preload="metadata"
+            <div className="relative rounded-2xl overflow-hidden border border-primary/20 group">
+              {/* Main Image */}
+              <div className="relative h-[400px] md:h-[500px] lg:h-[600px]">
+                <img 
+                  src={carouselImages[currentSlide].src}
+                  alt={carouselImages[currentSlide].alt}
+                  className="w-full h-full object-cover transition-all duration-500"
+                />
+                
+                {/* Overlay with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                
+                {/* Image title overlay */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-xl md:text-2xl font-bold mb-2">
+                    {carouselImages[currentSlide].title}
+                  </h3>
+                  <p className="text-gray-300 text-sm">
+                    Professional detailing showcasing our premium service quality
+                  </p>
+                </div>
+              </div>
+
+              {/* Navigation Arrows */}
+              <button 
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+                aria-label="Previous image"
               >
-                {/* <source src={FerrariVideo} type="video/mp4" /> */}
-                <source src="" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200 opacity-0 group-hover:opacity-100"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                      index === currentSlide 
+                        ? 'bg-primary w-8' 
+                        : 'bg-white/50 hover:bg-white/70'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
+            
+            {/* Slide counter */}
             <div className="text-center mt-6">
               <p className="text-gray-300 text-sm">
-                Professional Ferrari detailing showcasing our premium service quality
+                {currentSlide + 1} of {carouselImages.length} - Professional car detailing results
               </p>
             </div>
           </div>
