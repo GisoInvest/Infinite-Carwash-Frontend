@@ -56,6 +56,65 @@ const BookingSystem = () => {
   ];
 
   const services = {
+    basic: [
+      { 
+        id: 'car-wash', 
+        name: 'Car Wash', 
+        pricing: {
+          small: 9,
+          medium: 12,
+          large: 14,
+          van: 15
+        },
+        duration: '30-45 mins',
+        details: [
+          'Exterior rinse & wash',
+          'Wheel cleaning',
+          'Tire shine application',
+          'Window cleaning',
+          'Quick dry & finish'
+        ]
+      },
+      { 
+        id: 'mini-valet', 
+        name: 'Mini Valet', 
+        pricing: {
+          small: 14,
+          medium: 16,
+          large: 18,
+          van: 20
+        },
+        duration: '60-90 mins',
+        details: [
+          'Full exterior wash',
+          'Complete interior vacuum',
+          'Dashboard & trim cleaning',
+          'Window cleaning inside & out',
+          'Tire shine & wheel clean',
+          'Air freshener application'
+        ]
+      },
+      { 
+        id: 'full-valet', 
+        name: 'Full Valet', 
+        pricing: {
+          small: 45,
+          medium: 55,
+          large: 65,
+          van: 70
+        },
+        duration: '90-120 mins',
+        details: [
+          'Complete exterior wash & wax',
+          'Deep interior vacuum & clean',
+          'Leather/fabric conditioning',
+          'Dashboard & trim restoration',
+          'Alloy wheel deep clean',
+          'Paint protection spray',
+          'Engine bay cleaning'
+        ]
+      }
+    ],
     premium: [
       { 
         id: 'interior-detailing', 
@@ -131,9 +190,14 @@ const BookingSystem = () => {
       let basePrice = 0;
       
       // Find the service and calculate price
+      const basicService = services.basic.find(s => s.id === bookingData.service);
       const premiumService = services.premium.find(s => s.id === bookingData.service);
       
-      if (premiumService) {
+      if (basicService) {
+        // Basic services have vehicle-specific pricing
+        basePrice = basicService.pricing[bookingData.vehicleType];
+      } else if (premiumService) {
+        // Premium services have fixed pricing
         basePrice = premiumService.price;
       }
 
@@ -193,7 +257,7 @@ const BookingSystem = () => {
       customerName: bookingData.customerInfo.name,
       customerEmail: bookingData.customerInfo.email,
       customerPhone: bookingData.customerInfo.phone,
-      serviceType: services.core.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name,
+      serviceType: services.basic.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name,
       vehicleType: vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name,
       serviceDate: bookingData.date,
       serviceTime: bookingData.time,
@@ -347,7 +411,7 @@ const BookingSystem = () => {
             <div className="bg-black/30 rounded-lg p-4 mb-6">
               <h3 className="text-lg font-semibold text-white mb-2">Booking Summary</h3>
               <div className="text-left space-y-2 text-gray-300">
-                <p><span className="text-primary">Service:</span> {services.core.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name}</p>
+                <p><span className="text-primary">Service:</span> {services.basic.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name}</p>
                 <p><span className="text-primary">Vehicle:</span> {vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name}</p>
                 <p><span className="text-primary">Date & Time:</span> {bookingData.date} at {bookingData.time}</p>
                 <p><span className="text-primary">Location:</span> {serviceLocations.find(l => l.id === bookingData.serviceLocation)?.name}</p>
@@ -458,6 +522,53 @@ const BookingSystem = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-6">
+              {/* Basic Services */}
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4">Basic Services</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {services.basic.map((service) => (
+                    <div
+                      key={service.id}
+                      onClick={() => handleInputChange('service', service.id)}
+                      className={`cursor-pointer p-4 rounded-lg border-2 transition-colors relative ${
+                        bookingData.service === service.id
+                          ? 'border-primary bg-primary/10'
+                          : 'border-gray-600 hover:border-primary/50'
+                      }`}
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <h4 className="font-semibold text-white">{service.name}</h4>
+                        <div className="group relative">
+                          <Info className="w-4 h-4 text-primary cursor-help" />
+                          <div className="absolute right-0 top-6 w-64 bg-gray-800 border border-primary/20 rounded-lg p-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <h5 className="text-white font-semibold mb-2">Service Includes:</h5>
+                            <ul className="text-gray-300 text-sm space-y-1">
+                              {service.details.map((detail, index) => (
+                                <li key={index} className="flex items-start">
+                                  <CheckCircle className="w-3 h-3 text-primary mr-2 mt-0.5 flex-shrink-0" />
+                                  {detail}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-gray-400 text-sm mb-2">{service.duration}</p>
+                      {bookingData.vehicleType ? (
+                        <p className="text-primary font-semibold">£{service.pricing[bookingData.vehicleType]}</p>
+                      ) : (
+                        <div className="text-xs text-gray-400">
+                          <p>Small Car: £{service.pricing.small}</p>
+                          <p>Medium Car: £{service.pricing.medium}</p>
+                          <p>Large Car: £{service.pricing.large}</p>
+                          <p>Van: £{service.pricing.van}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Premium Services */}
               <div>
                 <h3 className="text-lg font-semibold text-white mb-4">Premium Services</h3>
