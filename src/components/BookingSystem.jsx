@@ -254,16 +254,16 @@ const BookingSystem = () => {
     
     // Prepare payment data
     const paymentBookingData = {
-      customerName: bookingData.customerInfo.name,
-      customerEmail: bookingData.customerInfo.email,
-      customerPhone: bookingData.customerInfo.phone,
-      serviceType: services.basic.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name,
+      name: bookingData.customerInfo.name,
+      email: bookingData.customerInfo.email,
+      phone: bookingData.customerInfo.phone,
+      service: services.basic.find(s => s.id === bookingData.service)?.name || services.premium.find(s => s.id === bookingData.service)?.name,
       vehicleType: vehicleTypes.find(v => v.id === bookingData.vehicleType)?.name,
-      serviceDate: bookingData.date,
-      serviceTime: bookingData.time,
+      date: bookingData.date,
+      time: bookingData.time,
       serviceLocation: serviceLocations.find(l => l.id === bookingData.serviceLocation)?.name,
       address: bookingData.serviceLocation === 'mobile' ? bookingData.customerInfo.address : 'Unit Visit',
-      totalAmount: pricing.basePrice,
+      totalPrice: pricing.basePrice,
       depositAmount: pricing.deposit,
       specialRequests: bookingData.specialRequests
     };
@@ -276,11 +276,8 @@ const BookingSystem = () => {
     } else {
       // No deposit required, complete booking directly
       try {
-        const response = await fetch('https://infinite-carwash-backend.onrender.com/api/book', {
+        const response = await apiRequest('api/book', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
           body: JSON.stringify(paymentBookingData)
         });
 
@@ -295,11 +292,12 @@ const BookingSystem = () => {
           // Show booking confirmation
           setIsBookingComplete(true);
         } else {
-          throw new Error('Failed to create booking');
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to create booking');
         }
       } catch (error) {
         console.error('Error submitting booking:', error);
-        alert('Failed to submit booking. Please try again.');
+        alert(`Failed to submit booking: ${error.message}. Please try again.`);
       }
     }
   };

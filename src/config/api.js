@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'https://infinite-carwash-backend.onrender.com';
+const API_BASE_URL = 'https://5000-izfexc9bqw8hv27oppbkz-2e9849d6.manusvm.computer';
 
 export const getApiUrl = (endpoint) => {
   // Remove leading slash if present to avoid double slashes
