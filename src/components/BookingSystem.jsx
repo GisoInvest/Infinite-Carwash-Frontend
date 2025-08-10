@@ -22,11 +22,17 @@ import StripePayment from './StripePayment';
 
 const BookingSystem = () => {
   const [currentStep, setCurrentStep] = useState('booking'); // 'booking' or 'payment'
+  
+  // Initialize with tomorrow's date to ensure useEffect triggers
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.toISOString().split('T')[0];
+  
   const [bookingData, setBookingData] = useState({
     vehicleType: '',
     service: '',
     serviceLocation: '',
-    date: '',
+    date: tomorrowStr, // Initialize with tomorrow's date
     time: '',
     customerInfo: {
       name: '',
