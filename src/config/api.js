@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'https://5000-izfexc9bqw8hv27oppbkz-2e9849d6.manusvm.computer';
+const API_BASE_URL = 'https://lnh8imcnv9de.manus.space';
 
 export const getApiUrl = (endpoint) => {
   // Remove leading slash if present to avoid double slashes
