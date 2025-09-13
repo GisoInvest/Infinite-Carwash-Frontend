@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// Force deployment update - Admin panel fix
+// Subscription System v2.0 - Complete transformation to subscription-based services
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SubscriptionPopup from './components/SubscriptionPopup';
 import ChatBot from './components/ChatBot';
+import LiveNotifications from './components/LiveNotifications';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -12,6 +13,7 @@ import Portfolio from './pages/Portfolio';
 import TermsConditions from './pages/TermsConditions';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
+import SubscriptionBooking from './pages/SubscriptionBooking';
 import Tracking from './pages/Tracking';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
@@ -33,6 +35,7 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-background text-foreground">
+        <LiveNotifications customerId="guest" />
         <Navbar />
         <main>
           <Routes>
@@ -43,7 +46,9 @@ function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/booking" element={<Booking />} />
+            <Route path="/booking" element={<SubscriptionBooking />} />
+            <Route path="/subscription" element={<SubscriptionBooking />} />
+            <Route path="/old-booking" element={<Booking />} />
             <Route path="/tracking" element={<Tracking />} />
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
