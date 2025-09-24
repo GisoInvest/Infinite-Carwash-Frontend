@@ -1,7 +1,5 @@
 // API Configuration for Subscription System v2.0
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://infinite-carwash-backend.onrender.com'
-  : 'http://localhost:5000';
+const API_BASE_URL = 'https://infinite-carwash-backend.onrender.com';
 
 export const getApiUrl = (endpoint) => {
   // Remove leading slash if present to avoid double slashes
