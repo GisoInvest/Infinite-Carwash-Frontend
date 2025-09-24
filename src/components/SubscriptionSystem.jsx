@@ -350,7 +350,7 @@ const SubscriptionSystem = () => {
       {/* Step 3: Customer Information */}
       {step === 3 && (
         <div className="customer-info-step">
-          <h2>Your Information</h2>
+          <h2>✨ Your Information</h2>
           
           <div className="form-grid">
             <div className="form-group">
@@ -483,9 +483,13 @@ const SubscriptionSystem = () => {
             </div>
           </div>
 
-          <div className="step-actions">
-            <button onClick={() => setStep(2)} className="back-btn">Back</button>
-            <button onClick={handleCustomerInfoNext} className="next-btn">Next</button>
+          <div className="step-navigation">
+            <button onClick={() => setStep(2)} className="nav-button back">
+              ← Back
+            </button>
+            <button onClick={handleCustomerInfoNext} className="nav-button next">
+              Next →
+            </button>
           </div>
         </div>
       )}
@@ -493,33 +497,33 @@ const SubscriptionSystem = () => {
       {/* Step 4: Confirmation */}
       {step === 4 && (
         <div className="confirmation-step">
-          <h2>Confirm Your Subscription</h2>
+          <h2>🎉 Confirm Your Subscription</h2>
           
           <div className="confirmation-summary">
             <div className="plan-summary">
-              <h3>{selectedPlan.name}</h3>
+              <h3>📋 {selectedPlan.name}</h3>
               <p>{selectedPlan.description}</p>
               <div className="service-details">
-                <div>Vehicle: {vehicleTypes.find(v => v.value === selectedVehicleType)?.label}</div>
-                <div>Frequency: {frequencyOptions.find(f => f.value === selectedFrequency)?.label}</div>
-                <div>Duration: {selectedPlan.duration_minutes} minutes per service</div>
+                <div>🚗 Vehicle: {vehicleTypes.find(v => v.value === selectedVehicleType)?.label}</div>
+                <div>📅 Frequency: {frequencyOptions.find(f => f.value === selectedFrequency)?.label}</div>
+                <div>⏱️ Duration: {selectedPlan.duration_minutes} minutes per service</div>
               </div>
             </div>
 
             <div className="customer-summary">
-              <h3>Customer Information</h3>
-              <div>Name: {customerInfo.customer_name}</div>
-              <div>Email: {customerInfo.customer_email}</div>
-              <div>Phone: {customerInfo.customer_phone}</div>
-              <div>Address: {customerInfo.address}, {customerInfo.postcode}</div>
-              <div>Schedule: {customerInfo.preferred_day}s at {customerInfo.preferred_time}</div>
-              <div>Start Date: {new Date(customerInfo.start_date).toLocaleDateString()}</div>
+              <h3>👤 Customer Information</h3>
+              <div>📝 Name: {customerInfo.customer_name}</div>
+              <div>📧 Email: {customerInfo.customer_email}</div>
+              <div>📞 Phone: {customerInfo.customer_phone}</div>
+              <div>🏠 Address: {customerInfo.address}, {customerInfo.postcode}</div>
+              <div>📆 Schedule: {customerInfo.preferred_day}s at {customerInfo.preferred_time}</div>
+              <div>🗓️ Start Date: {new Date(customerInfo.start_date).toLocaleDateString()}</div>
             </div>
 
             <div className="pricing-summary">
-              <h3>Subscription Pricing</h3>
+              <h3>💰 Subscription Pricing</h3>
               <div className="price-breakdown">
-                <div>Monthly Price: £{calculatedPrice}</div>
+                <div className="monthly-price">Monthly Price: £{calculatedPrice}</div>
                 <div>Services per month: {selectedFrequency === 'weekly' ? '4' : selectedFrequency === 'bi_weekly' ? '2' : '1'}</div>
                 <div>Price per service: £{(calculatedPrice / (selectedFrequency === 'weekly' ? 4 : selectedFrequency === 'bi_weekly' ? 2 : 1)).toFixed(2)}</div>
               </div>
@@ -527,20 +531,22 @@ const SubscriptionSystem = () => {
           </div>
 
           <div className="terms-agreement">
-            <label>
+            <label className="terms-checkbox">
               <input type="checkbox" required />
-              I agree to the terms and conditions of the subscription service
+              <span>I agree to the terms and conditions of the subscription service</span>
             </label>
           </div>
 
-          <div className="step-actions">
-            <button onClick={() => setStep(3)} className="back-btn">Back</button>
+          <div className="step-navigation">
+            <button onClick={() => setStep(3)} className="nav-button back">
+              ← Back
+            </button>
             <button 
               onClick={handleSubscriptionSubmit} 
-              className="confirm-btn"
+              className="nav-button confirm"
               disabled={submitting}
             >
-              {submitting ? 'Creating Subscription...' : `Confirm Subscription - £${calculatedPrice}/month`}
+              {submitting ? '⏳ Creating Subscription...' : `🎯 Confirm Subscription - £${calculatedPrice}/month`}
             </button>
           </div>
         </div>
