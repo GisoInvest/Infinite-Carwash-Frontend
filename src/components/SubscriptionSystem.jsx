@@ -308,15 +308,41 @@ const SubscriptionSystem = () => {
           </div>
 
           {calculatedPrice > 0 && (
-            <div className="price-summary">
-              <h3>Monthly Subscription Price: £{calculatedPrice}</h3>
-              <p>This includes all {selectedFrequency === 'weekly' ? '4' : selectedFrequency === 'bi_weekly' ? '2' : '1'} service{selectedFrequency !== 'monthly' ? 's' : ''} per month</p>
+            <div className="price-display">
+              <div className="price-label">Monthly Subscription Price</div>
+              <div className="price-amount">£{calculatedPrice}</div>
+              <div className="price-details">
+                This includes all {selectedFrequency === 'weekly' ? '4' : selectedFrequency === 'bi_weekly' ? '2' : '1'} service{selectedFrequency !== 'monthly' ? 's' : ''} per month
+              </div>
+              {selectedFrequency !== 'monthly' && (
+                <div className="price-savings">
+                  🎉 You're saving {selectedFrequency === 'weekly' ? '15%' : '10%'} with this plan!
+                </div>
+              )}
+              <div className="price-breakdown">
+                <div className="breakdown-item">
+                  <span>Service Type:</span>
+                  <span className="breakdown-value">{selectedPlan?.name}</span>
+                </div>
+                <div className="breakdown-item">
+                  <span>Vehicle Type:</span>
+                  <span className="breakdown-value">{vehicleTypes.find(v => v.value === selectedVehicleType)?.label}</span>
+                </div>
+                <div className="breakdown-item">
+                  <span>Frequency:</span>
+                  <span className="breakdown-value">{frequencyOptions.find(f => f.value === selectedFrequency)?.label}</span>
+                </div>
+              </div>
             </div>
           )}
 
-          <div className="step-actions">
-            <button onClick={() => setStep(1)} className="back-btn">Back</button>
-            <button onClick={handleConfigurationNext} className="next-btn">Next</button>
+          <div className="step-navigation">
+            <button onClick={() => setStep(1)} className="nav-button back">
+              ← Back
+            </button>
+            <button onClick={handleConfigurationNext} className="nav-button next">
+              Next →
+            </button>
           </div>
         </div>
       )}
