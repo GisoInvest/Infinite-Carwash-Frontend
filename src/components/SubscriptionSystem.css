@@ -381,29 +381,63 @@
 }
 
 /* Configuration Styles */
-.config-section {
-  margin-bottom: 30px;
-  padding: 25px;
-  background: rgba(51, 65, 85, 0.4);
-  border-radius: 15px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+.configuration-step {
+  padding: 2rem;
 }
 
-.config-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+.selected-plan-summary {
+  background: rgba(212, 175, 55, 0.1);
+  border: 2px solid #D4AF37;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.selected-plan-summary h2 {
   color: #D4AF37;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.selected-plan-summary p {
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.configuration-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.vehicle-selection,
+.frequency-selection {
+  background: rgba(51, 65, 85, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.vehicle-selection h3,
+.frequency-selection h3 {
+  color: #D4AF37;
+  font-size: 1.4rem;
+  font-weight: 600;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.config-options {
+.vehicle-options,
+.frequency-options {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 }
 
-.config-option {
+.vehicle-option,
+.frequency-option {
   background: rgba(30, 41, 59, 0.8);
   border: 2px solid rgba(212, 175, 55, 0.3);
   border-radius: 12px;
@@ -411,38 +445,51 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
+  position: relative;
 }
 
-.config-option:hover {
+.vehicle-option:hover,
+.frequency-option:hover {
   border-color: #D4AF37;
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
 }
 
-.config-option.selected {
+.vehicle-option.selected,
+.frequency-option.selected {
   border-color: #D4AF37;
   background: rgba(212, 175, 55, 0.1);
   box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
-.option-title {
+.vehicle-option h4,
+.frequency-option h4 {
+  color: #ffffff;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #ffffff;
   margin-bottom: 8px;
 }
 
-.option-description {
+.vehicle-option p,
+.frequency-option p {
   color: #cbd5e1;
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
-.option-discount {
+.frequency-option .discount {
   color: #22c55e;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
+.frequency-option .standard {
+  color: #D4AF37;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Price Display */
 .price-display {
   background: rgba(212, 175, 55, 0.1);
   border: 2px solid #D4AF37;
