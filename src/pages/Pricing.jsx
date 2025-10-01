@@ -171,7 +171,7 @@ const Pricing = () => {
               <span className="text-primary font-semibold">Expected Launch</span>
             </div>
             <p className="text-gray-300 text-sm">
-              Early 2025 - Stay tuned for updates!
+              Q2 2025 - Stay tuned for updates!
             </p>
           </div>
           
