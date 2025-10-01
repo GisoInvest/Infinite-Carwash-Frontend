@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useState } from 'react';
 import { 
   Car, 
   Truck, 
@@ -10,10 +11,15 @@ import {
   Star,
   Info,
   MapPin,
-  Home
+  Home,
+  X,
+  Wrench,
+  Calendar
 } from 'lucide-react';
 
 const Pricing = () => {
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
   const basicServices = [
     {
       service: "Car Wash",
@@ -25,12 +31,7 @@ const Pricing = () => {
         { size: "Large Car", price: "£14" },
         { size: "Van", price: "£15" }
       ],
-      homePricing: [
-        { size: "Small Car", price: "£9" },
-        { size: "Medium Car", price: "£12" },
-        { size: "Large Car", price: "£14" },
-        { size: "Van", price: "£15" }
-      ]
+      homePricing: null // No home service for Car Wash
     },
     {
       service: "Mini Valet",
@@ -133,6 +134,72 @@ const Pricing = () => {
     }
   ];
 
+  // Coming Soon Popup Component
+  const ComingSoonPopup = () => (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-gray-900 to-black border border-primary/30 rounded-2xl p-8 max-w-md w-full mx-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-16 translate-x-16"></div>
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full translate-y-12 -translate-x-12"></div>
+        
+        {/* Close button */}
+        <button 
+          onClick={() => setShowComingSoon(false)}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+        >
+          <X className="w-6 h-6" />
+        </button>
+        
+        {/* Content */}
+        <div className="relative z-10 text-center">
+          <div className="bg-gradient-to-br from-primary/20 to-blue-500/20 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+            <Wrench className="w-10 h-10 text-primary animate-pulse" />
+          </div>
+          
+          <h3 className="text-2xl font-bold text-white mb-4">
+            🚧 Coming Soon!
+          </h3>
+          
+          <p className="text-gray-300 mb-6 leading-relaxed">
+            We're excited to announce that our <span className="text-primary font-semibold">Location Base Service</span> will be available soon! 
+            We're currently working hard to open our own professional detailing unit to serve you better.
+          </p>
+          
+          <div className="bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-lg p-4 mb-6 border border-primary/20">
+            <div className="flex items-center justify-center mb-2">
+              <Calendar className="w-5 h-5 text-primary mr-2" />
+              <span className="text-primary font-semibold">Expected Launch</span>
+            </div>
+            <p className="text-gray-300 text-sm">
+              Early 2025 - Stay tuned for updates!
+            </p>
+          </div>
+          
+          <p className="text-gray-400 text-sm mb-6">
+            In the meantime, enjoy our convenient <span className="text-primary">Home Base Service</span> where we come to you!
+          </p>
+          
+          <div className="flex gap-3">
+            <Button 
+              onClick={() => setShowComingSoon(false)}
+              className="flex-1 bg-gradient-to-r from-primary to-yellow-500 text-black font-semibold hover:from-primary/90 hover:to-yellow-500/90 transition-all duration-300"
+            >
+              Got it!
+            </Button>
+            <Link to="/contact" className="flex-1">
+              <Button 
+                variant="outline" 
+                className="w-full border-primary/30 text-primary hover:bg-primary/10 transition-all duration-300"
+              >
+                Contact Us
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const ServiceCard = ({ service, index }) => (
     <Card key={index} className="bg-card border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 hover:scale-105">
       <CardHeader>
@@ -144,45 +211,85 @@ const Pricing = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          {/* Location Base Service */}
-          <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-lg p-4 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
-            <div className="flex items-center mb-3">
-              <MapPin className="w-4 h-4 mr-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-              <h4 className="text-sm font-semibold text-blue-400">Location Base Service</h4>
-            </div>
-            <div className="space-y-2">
-              {service.locationPricing.map((priceItem, priceIdx) => (
-                <div key={priceIdx} className="flex justify-between items-center bg-blue-500/5 hover:bg-blue-500/10 rounded px-2 py-1 transition-colors duration-200">
-                  <span className="text-gray-300 text-xs">{priceItem.size}</span>
-                  <span className="text-blue-400 font-semibold text-sm">{priceItem.price}</span>
+        {service.homePricing ? (
+          // Services with both Location Base and Home Base
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              {/* Location Base Service */}
+              <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-lg p-4 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                <div className="flex items-center mb-3">
+                  <MapPin className="w-4 h-4 mr-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                  <h4 className="text-sm font-semibold text-blue-400">Location Base Service</h4>
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="space-y-2">
+                  {service.locationPricing.map((priceItem, priceIdx) => (
+                    <div key={priceIdx} className="flex justify-between items-center bg-blue-500/5 hover:bg-blue-500/10 rounded px-2 py-1 transition-colors duration-200">
+                      <span className="text-gray-300 text-xs">{priceItem.size}</span>
+                      <span className="text-blue-400 font-semibold text-sm">{priceItem.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-          {/* Home Base Service */}
-          <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-4 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group">
-            <div className="flex items-center mb-3">
-              <Home className="w-4 h-4 mr-2 text-primary group-hover:scale-110 transition-transform duration-300" />
-              <h4 className="text-sm font-semibold text-primary">Home Base Service</h4>
-            </div>
-            <div className="space-y-2">
-              {service.homePricing.map((priceItem, priceIdx) => (
-                <div key={priceIdx} className="flex justify-between items-center bg-primary/5 hover:bg-primary/10 rounded px-2 py-1 transition-colors duration-200">
-                  <span className="text-gray-300 text-xs">{priceItem.size}</span>
-                  <span className="text-primary font-semibold text-sm">{priceItem.price}</span>
+              {/* Home Base Service */}
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-4 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 group">
+                <div className="flex items-center mb-3">
+                  <Home className="w-4 h-4 mr-2 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  <h4 className="text-sm font-semibold text-primary">Home Base Service</h4>
                 </div>
-              ))}
+                <div className="space-y-2">
+                  {service.homePricing.map((priceItem, priceIdx) => (
+                    <div key={priceIdx} className="flex justify-between items-center bg-primary/5 hover:bg-primary/10 rounded px-2 py-1 transition-colors duration-200">
+                      <span className="text-gray-300 text-xs">{priceItem.size}</span>
+                      <span className="text-primary font-semibold text-sm">{priceItem.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        
-        <Link to="/booking">
-          <Button className="w-full bg-primary text-black hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105">
-            Book Now
-          </Button>
-        </Link>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Button 
+                onClick={() => setShowComingSoon(true)}
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-105"
+              >
+                📞 Call Us
+              </Button>
+              <Link to="/booking">
+                <Button className="w-full bg-primary text-black hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105">
+                  Book Now
+                </Button>
+              </Link>
+            </div>
+          </>
+        ) : (
+          // Car Wash - Location Base only
+          <>
+            <div className="mb-4">
+              <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-lg p-4 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 group">
+                <div className="flex items-center mb-3">
+                  <MapPin className="w-4 h-4 mr-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                  <h4 className="text-sm font-semibold text-blue-400">Location Base Service</h4>
+                </div>
+                <div className="space-y-2">
+                  {service.locationPricing.map((priceItem, priceIdx) => (
+                    <div key={priceIdx} className="flex justify-between items-center bg-blue-500/5 hover:bg-blue-500/10 rounded px-2 py-1 transition-colors duration-200">
+                      <span className="text-gray-300 text-xs">{priceItem.size}</span>
+                      <span className="text-blue-400 font-semibold text-sm">{priceItem.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <Button 
+              onClick={() => setShowComingSoon(true)}
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-105"
+            >
+              📞 Call Us
+            </Button>
+          </>
+        )}
       </CardContent>
     </Card>
   );
@@ -223,17 +330,27 @@ const Pricing = () => {
           </div>
         </div>
         
-        <Link to="/booking">
-          <Button className="w-full bg-primary text-black hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105">
-            Book Now
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <Button 
+            onClick={() => setShowComingSoon(true)}
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-105"
+          >
+            📞 Call Us
           </Button>
-        </Link>
+          <Link to="/booking">
+            <Button className="w-full bg-primary text-black hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:scale-105">
+              Book Now
+            </Button>
+          </Link>
+        </div>
       </CardContent>
     </Card>
   );
 
   return (
     <div className="min-h-screen py-20">
+      {/* Coming Soon Popup */}
+      {showComingSoon && <ComingSoonPopup />}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <div className="text-center mb-16">
