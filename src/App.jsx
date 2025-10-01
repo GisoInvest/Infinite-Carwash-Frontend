@@ -14,7 +14,7 @@ import TermsConditions from './pages/TermsConditions';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
 import SubscriptionBooking from './pages/SubscriptionBooking';
-import Tracking from './pages/Tracking';
+
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import './App.css';
@@ -49,7 +49,7 @@ function App() {
             <Route path="/booking" element={<SubscriptionBooking />} />
             <Route path="/subscription" element={<SubscriptionBooking />} />
             <Route path="/old-booking" element={<Booking />} />
-            <Route path="/tracking" element={<Tracking />} />
+
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>

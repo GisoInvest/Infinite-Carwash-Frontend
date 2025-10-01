@@ -30,7 +30,22 @@ const SubscriptionSystem = () => {
   useEffect(() => {
     fetchSubscriptionPlans();
     setDefaultStartDate();
+    handleUrlParameters();
   }, []);
+
+  const handleUrlParameters = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const cancelled = urlParams.get('cancelled');
+    const sessionId = urlParams.get('session_id');
+
+    if (success === 'true') {
+      setMessage('🎉 Subscription created successfully! You will receive a confirmation email shortly.');
+      setStep(5); // Success step
+    } else if (cancelled === 'true') {
+      setMessage('❌ Payment was cancelled. You can try again anytime.');
+    }
+  };
 
   useEffect(() => {
     if (selectedPlan && selectedVehicleType && selectedFrequency) {
@@ -103,33 +118,53 @@ const SubscriptionSystem = () => {
     setMessage('');
 
     try {
-      const subscriptionData = {
-        plan_id: selectedPlan.plan_id,
-        vehicle_type: selectedVehicleType,
-        frequency: selectedFrequency,
-        service_location: 'Mobile Service',
-        ...customerInfo
+      // Prepare customer information for Stripe
+      const customer_info = {
+        email: customerInfo.customer_email,
+        name: customerInfo.customer_name,
+        phone: customerInfo.customer_phone,
+        address: {
+          line1: customerInfo.address,
+          postal_code: customerInfo.postcode,
+          country: 'GB'
+        }
       };
 
-      console.log('Submitting subscription:', subscriptionData);
+      const checkoutData = {
+        plan_id: selectedPlan.plan_id,
+        customer_info: customer_info,
+        vehicle_type: selectedVehicleType,
+        frequency: selectedFrequency,
+        success_url: `${window.location.origin}/subscription?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${window.location.origin}/subscription?cancelled=true`,
+        metadata: {
+          preferred_day: customerInfo.preferred_day,
+          preferred_time: customerInfo.preferred_time,
+          start_date: customerInfo.start_date,
+          notification_email: customerInfo.notification_email,
+          notification_sms: customerInfo.notification_sms,
+          notification_days_ahead: customerInfo.notification_days_ahead
+        }
+      };
 
-      const response = await apiRequest('/api/v2/create-subscription', {
+      console.log('Creating Stripe checkout session:', checkoutData);
+
+      const response = await apiRequest('/api/stripe/create-checkout-session', {
         method: 'POST',
-        body: JSON.stringify(subscriptionData)
+        body: JSON.stringify(checkoutData)
       });
 
       if (response.success) {
-        setMessage(`Subscription created successfully! Your subscription ID is: ${response.subscription_id}`);
-        // Reset form or redirect
-        setTimeout(() => {
-          window.location.href = '/subscription-success';
-        }, 3000);
+        setMessage('Redirecting to secure payment...');
+        
+        // Redirect to Stripe Checkout
+        window.location.href = response.checkout_url;
       } else {
-        setMessage(`Failed to create subscription: ${response.error || 'Unknown error'}`);
+        setMessage(`Failed to create checkout session: ${response.error || 'Unknown error'}`);
       }
     } catch (error) {
-      console.error('Subscription error:', error);
-      setMessage('Failed to create subscription. Please try again.');
+      console.error('Checkout error:', error);
+      setMessage('Failed to create checkout session. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -548,6 +583,58 @@ const SubscriptionSystem = () => {
             >
               {submitting ? '⏳ Creating Subscription...' : `🎯 Confirm Subscription - £${calculatedPrice}/month`}
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 5: Success */}
+      {step === 5 && (
+        <div className="success-step">
+          <div className="success-content">
+            <div className="success-icon">🎉</div>
+            <h2>Subscription Created Successfully!</h2>
+            <p>Thank you for choosing Infinite Mobile Carwash & Detailing!</p>
+            
+            <div className="success-details">
+              <div className="success-message">
+                <h3>What happens next?</h3>
+                <ul>
+                  <li>✅ You will receive a confirmation email with your subscription details</li>
+                  <li>✅ We will contact you to schedule your first service</li>
+                  <li>✅ Your subscription will begin on your chosen start date</li>
+                  <li>✅ You can manage your subscription anytime through your customer portal</li>
+                </ul>
+              </div>
+              
+              <div className="contact-info">
+                <h3>Need help?</h3>
+                <p>Contact us at:</p>
+                <p>📞 07403139086</p>
+                <p>📧 info@infinitemobilecarwashdetailing.co.uk</p>
+              </div>
+            </div>
+            
+            <div className="success-actions">
+              <button 
+                onClick={() => window.location.href = '/'}
+                className="nav-button primary"
+              >
+                Return to Home
+              </button>
+              <button 
+                onClick={() => {
+                  setStep(1);
+                  setSelectedPlan(null);
+                  setSelectedVehicleType('');
+                  setSelectedFrequency('');
+                  setMessage('');
+                  window.history.replaceState({}, '', '/subscription');
+                }}
+                className="nav-button secondary"
+              >
+                Create Another Subscription
+              </button>
+            </div>
           </div>
         </div>
       )}
