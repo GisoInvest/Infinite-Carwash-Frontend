@@ -46,10 +46,10 @@ const Services = () => {
         "Air freshener application"
       ],
       pricing: [
-        { size: "Small Car", price: "£14" },
-        { size: "Medium Car", price: "£16" },
-        { size: "Large Car", price: "£18" },
-        { size: "Van", price: "£20" }
+        { size: "Small Car", price: "£35" },
+        { size: "Medium Car", price: "£50" },
+        { size: "Large Car", price: "£60" },
+        { size: "Van", price: "£75" }
       ],
       time: "60-90 mins"
     },
@@ -67,10 +67,10 @@ const Services = () => {
         "Engine bay cleaning"
       ],
       pricing: [
-        { size: "Small Car", price: "£45" },
-        { size: "Medium Car", price: "£55" },
-        { size: "Large Car", price: "£65" },
-        { size: "Van", price: "£70" }
+        { size: "Small Car", price: "£80" },
+        { size: "Medium Car", price: "£100" },
+        { size: "Large Car", price: "£125" },
+        { size: "Van", price: "£140" }
       ],
       time: "90-120 mins"
     }
@@ -89,7 +89,7 @@ const Services = () => {
         "Odor elimination",
         "UV protection application"
       ],
-      price: "£120",
+      price: "£140",
       time: "2-3 hours"
     },
     {
@@ -104,7 +104,7 @@ const Services = () => {
         "Trim restoration",
         "Glass treatment"
       ],
-      price: "£200",
+      price: "£260",
       time: "4-5 hours"
     },
     {
@@ -119,7 +119,7 @@ const Services = () => {
         "Engine bay cleaning",
         "Final inspection & touch-ups"
       ],
-      price: "£300",
+      price: "£360",
       time: "6-8 hours"
     },
     {
@@ -134,7 +134,7 @@ const Services = () => {
         "Protective wax application",
         "Professional finish"
       ],
-      price: "£400",
+      price: "£450",
       time: "3-4 hours"
     },
     {
@@ -149,7 +149,7 @@ const Services = () => {
         "Premium protection application",
         "Show-quality finish"
       ],
-      price: "£550",
+      price: "£650",
       time: "6+ hours"
     }
   ];
