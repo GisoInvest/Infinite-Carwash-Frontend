@@ -80,14 +80,14 @@ const Pricing = () => {
     {
       service: "Exterior Detailing", 
       locationPrice: "£200",
-      homePrice: "£200",
+      homePrice: "£260",
       time: "4–5 hours",
       description: "Professional paint correction and protection"
     },
     {
       service: "Full Detailing",
       locationPrice: "£300", 
-      homePrice: "£300",
+      homePrice: "£360",
       time: "6–8 hours",
       description: "Complete interior and exterior transformation"
     },
