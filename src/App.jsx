@@ -14,6 +14,7 @@ import TermsConditions from './pages/TermsConditions';
 import Contact from './pages/Contact';
 import Booking from './pages/Booking';
 import SubscriptionBooking from './pages/SubscriptionBooking';
+import SubscriptionSuccess from './pages/SubscriptionSuccess';
 
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
@@ -47,7 +48,8 @@ function App() {
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/booking" element={<SubscriptionBooking />} />
-            <Route path="/subscription" element={<SubscriptionBooking />} />
+            <Route path="/subscription" element={<SubscriptionSuccess />} />
+            <Route path="/subscription-success" element={<SubscriptionSuccess />} />
             <Route path="/old-booking" element={<Booking />} />
 
             <Route path="/admin-login" element={<AdminLogin />} />
