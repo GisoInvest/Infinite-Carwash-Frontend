@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Subscription System v2.0 - Complete transformation to subscription-based services
-import Navbar from './components/Navbar';
+import EnhancedNavbar from './components/EnhancedNavbar';
+import './styles/animations.css';
 import Footer from './components/Footer';
 import SubscriptionPopup from './components/SubscriptionPopup';
 import ChatBot from './components/ChatBot';
 import LiveNotifications from './components/LiveNotifications';
-import Home from './pages/Home';
+import EnhancedHome from './pages/EnhancedHome';
 import About from './pages/About';
 import Services from './pages/Services';
 import Pricing from './pages/Pricing';
@@ -37,10 +38,10 @@ function App() {
     <Router>
       <div className="min-h-screen bg-background text-foreground">
         <LiveNotifications customerId="guest" />
-        <Navbar />
+        <EnhancedNavbar />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<EnhancedHome />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/pricing" element={<Pricing />} />
