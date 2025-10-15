@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Phone, Menu, X } from 'lucide-react';
 import soundManager from '../utils/soundManager';
+import logo from '../assets/IMCADUpdatedLogo.png';
 
 const EnhancedNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,9 +102,9 @@ const EnhancedNavbar = () => {
           >
             <div className="relative">
               <img 
-                src="/logo.png" 
+                src={logo} 
                 alt="Infinite Mobile Carwash & Detailing" 
-                className="h-10 w-auto transition-transform duration-300 group-hover:scale-110"
+                className="h-16 w-auto transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-hover:scale-150 transition-transform duration-300 -z-10" />
             </div>

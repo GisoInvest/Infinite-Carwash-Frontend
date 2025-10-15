@@ -182,10 +182,10 @@ const EnhancedHome = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-scale">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Infinite Mobile</span>
             <br />
-            <span className="text-primary animate-pulse-glow">Carwash & Detailing</span>
+            <span className="text-primary">Carwash & Detailing</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-200 mb-8 animate-slide-in-up">
@@ -209,6 +209,7 @@ const EnhancedHome = () => {
               size="lg"
               className="border-primary text-primary hover:bg-primary hover:text-black text-lg px-8 py-3"
               soundType="notification"
+              onClick={() => window.open('tel:07403139086')}
             >
               <Phone className="w-5 h-5 mr-2" />
               Call: 07403139086
@@ -321,7 +322,7 @@ const EnhancedHome = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <InteractiveButton
               size="lg"
-              className="bg-black text-primary hover:bg-gray-800 text-lg px-8 py-3"
+              className="bg-primary text-black hover:bg-primary/90 text-lg px-8 py-3"
               soundType="success"
             >
               <Link to="/booking" className="flex items-center">
