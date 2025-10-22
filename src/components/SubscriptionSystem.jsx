@@ -180,7 +180,8 @@ const SubscriptionSystem = () => {
   const frequencyOptions = [
     { value: 'weekly', label: 'Weekly', description: 'Every week (4 services/month)', discount: '15% discount' },
     { value: 'bi_weekly', label: 'Bi-Weekly', description: 'Every 2 weeks (2 services/month)', discount: '10% discount' },
-    { value: 'monthly', label: 'Monthly', description: 'Once per month (1 service/month)', discount: 'Standard rate' }
+    { value: 'monthly', label: 'Monthly', description: 'Once per month (1 service/month)', discount: 'Standard rate' },
+    { value: 'yearly', label: 'Yearly', description: 'Once per year (1 service/year)', discount: 'Premium service' }
   ];
 
   const daysOfWeek = [
